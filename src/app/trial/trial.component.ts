@@ -261,10 +261,3 @@ export class TrialComponent implements OnInit {
     }
 
 }
-
-
-
-
-
-
-
