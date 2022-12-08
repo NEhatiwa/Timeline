@@ -29,7 +29,11 @@ export class TrialComponent implements OnInit {
     ngAfterViewInit(): void {
         this.ctx = this.canvas.nativeElement.getContext( '2d' );
         this.startAnimation( 10 )
-        var timeoutfunc = setTimeout( this.timeoutfunction, 1000 );
+        //setInterval(()=>this.startAnimation(10),200)
+        var timeoutfunc = setTimeout(()=>this.timeoutfunction(), 1000 );
+    }
+
+    ngDoCheck(): void{
     }
     
     ngOnInit() {
@@ -91,7 +95,7 @@ export class TrialComponent implements OnInit {
             secSinceEpo = secSinceEpoch - parseFloat( JSON.stringify( secSinceEpoch % timeinterval ) );
         }
         this.drawTimeLineNew( startXValue/*start X value*/, 0/*cnt*/, parseFloat( JSON.stringify( secSinceEpo - ( 2 * timeinterval ) ) )/*starttime*/, timeinterval /*timeinterval*/, this.numSmallTicks/*number of small ticks*/ );
-        setTimeout( this.timeoutfunction, 1000 );
+        let t= setTimeout( ()=>this.timeoutfunction(), 1000 );
     }
 
 
