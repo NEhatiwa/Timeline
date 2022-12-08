@@ -1,0 +1,345 @@
+<html>
+<head>
+    <style>
+        #canvas {
+            border: 2px solid red;
+        }
+
+        #digitalClock {
+            font-family: sans-serif;
+            color: red;
+            font-size: 26px;
+            text-align: center;
+        }
+
+        #container {
+            width: 200px;
+            height: 200px;
+            overflow-x: auto;
+            overflow-y: hidden;
+            border: 1px;
+        }
+    </style>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+
+
+<script type="text/javascript">
+    var space = 12;
+    var totalNum = 30;
+    var startX = -100
+    var hr = 0;
+    var min = 0;
+    var sec = 0;
+    var counter = 0;
+    var secRem;
+    var count = 1;
+    var numSmallTicks = 4;
+
+    function startAnimation(initialTimeInterval) {
+        console.log('instartanmimation')
+        document.getElementById("gap").innerHTML = initialTimeInterval;
+        currentTime();
+        
+        var date = new Date();
+        var secSinceEpoch = new Date().getTime() / 1000; //current time in seconds since epoch
+        console.log(secSinceEpoch);
+        var ctx = document.getElementById('canvas').getContext('2d');
+        
+        var Seconds = date.getSeconds();
+        
+        drawFixedLine(ctx, parseInt(2*space*((numSmallTicks*2)+2)));
+        var newspace = parseFloat(space/(initialTimeInterval/10));
+        console.log("newspace is : ",newspace);
+
+        var startXValue = 0-parseFloat((Seconds%initialTimeInterval)*(newspace));
+        console.log(initialTimeInterval);
+        
+        drawTimeLineNew(ctx,startXValue/*start X value*/,0/*cnt*/,secSinceEpoch-(2*initialTimeInterval)/*starttime*/, initialTimeInterval /*timeinterval*/,numSmallTicks/*number of small ticks*/);
+    }
+
+    function zeroPad(nr,base){
+        console.log('inzeropad')
+        var  len = (String(base).length - String(nr).length)+1;
+        return len > 0? new Array(len).join('0')+nr : nr;
+    }
+
+    function drawTimeLineNew(ctx,startXValue,cnt,startTimeSinceEpoch,timeinterval,numSmallTicks)
+    {
+        //we have start time and time interval     
+        console.log('indrawtimelinenew')
+        var date = new Date(0);
+        date.setSeconds(parseInt(startTimeSinceEpoch));
+        
+        var Seconds = date.getSeconds();
+        var Hours = date.getHours();
+        var Minutes = date.getMinutes();
+        
+        var timeText = zeroPad(Hours,10)+":"+zeroPad(Minutes,10)+":"+zeroPad(Seconds,10);
+        
+        console.log(cnt + " - " + timeinterval + " : " + startTimeSinceEpoch + " - " + Seconds + " --- "    + date.toLocaleString() + " : " +timeText + "startx : "+ startXValue);
+                        
+        var x = startXValue;
+        
+        ctx.font = "10px Arial";
+        ctx.fillText(timeText, startXValue-25, 25); //rect size
+        
+        //vertical big line
+        drawLine(ctx, x, x, 40, 28)
+
+        //horizontal line
+        drawLine(ctx, x, (x + space), 40, 40)
+        x = x + space;
+        for (var j = 0; j < numSmallTicks * 2 + 1; j++) {
+            if (j == numSmallTicks) {
+                //middle line
+                drawLine(ctx, x, x, 40, 32)
+            } else {
+                //vertical samll line
+                drawLine(ctx, x, x, 40, 36)
+            }
+            //horizontal line
+            drawLine(ctx, x, (x + space), 40, 40)
+            x = x + space;
+        }
+            
+        cnt++;
+        if(cnt <= 16)
+            drawTimeLineNew(ctx,parseInt(startXValue+parseFloat(space*((numSmallTicks*2)+2))),cnt,startTimeSinceEpoch+parseFloat(timeinterval),timeinterval,numSmallTicks);
+            
+    }
+    
+    var timeoutfunc = setTimeout(function timeoutfunction() {
+        console.log('INHAAAAAaaaaaaa')
+                currentTime();
+                var ctx = document.getElementById('canvas').getContext('2d');
+                var timeinterval = document.getElementById("gap").innerHTML;
+                var date = new Date();
+                var secSinceEpoch = new Date().getTime() / 1000; //current time in seconds since epoch
+                
+                console.log("secSinceEpoch",secSinceEpoch);
+                var Seconds = date.getSeconds();
+                var Minutes =date.getMinutes();
+                var Hours = date.getHours();
+                
+                ctx.clearRect(0,0,2000,200);
+                drawFixedLine(ctx, parseInt(2*space*((numSmallTicks*2)+2)));
+                
+                
+                var newspace = parseFloat(space/(timeinterval/10));
+                console.log("newspace is : ",newspace);
+
+                var startXValue = 0-parseFloat((((Minutes*60)+Seconds)%timeinterval)*(newspace));
+                console.log("Yahi", startXValue, Minutes)
+                
+                var secSinceEpo;
+                
+                if (timeinterval>600){
+                    if(((Hours*3600)+(Minutes*60)+Seconds)%timeinterval == 0)
+                    {
+                         secSinceEpo = secSinceEpoch
+                    }
+                    else
+                    {
+    
+                    secSinceEpo = secSinceEpoch-parseFloat(((Hours*3600)+(Minutes*60)+Seconds)%timeinterval);
+                    console.log("YAHAPE DEKHE", secSinceEpo)
+                }
+                }
+                
+                if (timeinterval>60){
+                    if(((Minutes*60)+Seconds)%timeinterval == 0)
+                    {
+                         secSinceEpo = secSinceEpoch
+                    }
+                    else
+                    {
+    
+                    secSinceEpo = secSinceEpoch-parseFloat(((Minutes*60)+Seconds)%timeinterval);
+                    console.log("YAHAPE DEKHE", secSinceEpo)
+                }
+                }
+                
+                if(Seconds%timeinterval == 0)
+                {
+                    secSinceEpo = secSinceEpoch;
+                }
+                else
+                {
+                    secSinceEpo = secSinceEpoch-parseFloat(secSinceEpoch%timeinterval);
+                }
+                drawTimeLineNew(ctx,startXValue/*start X value*/,0/*cnt*/,parseFloat(secSinceEpo-(2*timeinterval))/*starttime*/, timeinterval /*timeinterval*/,numSmallTicks/*number of small ticks*/);
+
+                setTimeout(timeoutfunction,1000);
+        }, 1000);
+    //current time shown on upper left of the window
+    function currentTime() {
+        console.log('incurerenttime')
+        var date = new Date(); /* creating object of Date class */
+        var hour = updateTime(date.getHours());
+        var min = updateTime(date.getMinutes());
+        var sec = updateTime(date.getSeconds());
+
+        document.getElementById("digitalClock").innerHTML = hour + " : " + min + " : " + sec; /* adding time to the div */
+        var t = setTimeout(function () { currentTime() }, 1000); /* setting timer */
+    }
+
+    function updateTime(k) {
+        console.log('inupdatetime')
+        //depending on the scale (timegap between each of the line), you need to manipulate the time
+        if (k < 10) {
+            return "0" + k;
+        }
+        else {
+            return k;
+        }
+    }
+    // var currentHrs=20;
+    var prevSecs = 0;
+
+
+    function drawLine(conxt, startx, endx, starty, endy) {
+        console.log('indrawline')
+        conxt.beginPath();
+        conxt.moveTo(startx, starty);
+        conxt.lineTo(endx, endy);
+        conxt.strokeStyle = "#000000";
+        conxt.stroke();
+    }
+
+    function zoom() {
+        console.log('inzoom')
+        var timeinterval = document.getElementById("gap").innerHTML;
+                if(timeinterval == 10) { newtimeinterval = 20; }
+                if(timeinterval == 20) { newtimeinterval = 60; }
+                if(timeinterval == 60) { newtimeinterval = 120; }
+                if(timeinterval == 120) { newtimeinterval = 300; }
+                if(timeinterval == 300) { newtimeinterval = 600; }
+                if(timeinterval == 600) { newtimeinterval = 1200; }
+                if(timeinterval == 1200) { newtimeinterval = 3600; }
+                if(timeinterval == 3600) { newtimeinterval = (3600*2); }
+                if(timeinterval == 3600*2) { newtimeinterval = (3600*4); }
+
+                var ctx = document.getElementById('canvas').getContext('2d');
+                ctx.clearRect(0,0,2000,200);
+
+                clearTimeout(timeoutfunc)
+               startAnimation(newtimeinterval);
+    }
+
+    function zoom1() {
+        console.log('inzoom1')
+        var timeinterval = document.getElementById("gap").innerHTML;
+            if(timeinterval == 20) { newtimeinterval = 10; }
+            if(timeinterval == 60) { newtimeinterval = 20; }
+            if(timeinterval == 120) { newtimeinterval = 60; }
+            if( timeinterval == 300) { newtimeinterval = 120; }
+            if(timeinterval == 600) { newtimeinterval = 300; }
+            if(timeinterval == 1200) { newtimeinterval = 600; }
+            if(timeinterval == 3600) { newtimeinterval = 1200; }
+            if(timeinterval == 3600*2) { newtimeinterval = 3600; }
+            if(timeinterval == 3600*4) { newtimeinterval = 3600*2; }
+
+
+            var ctx = document.getElementById('canvas').getContext('2d');
+            ctx.clearRect(0,0,2000,200);
+
+            clearTimeout(timeoutfunc)
+            startAnimation(newtimeinterval);
+       
+    }
+
+    function drawFixedLine(conxt, fixedLineX) {
+        console.log('infixedline')
+        // var startX = 200+(date.getSeconds()%10 * 10);
+        conxt.beginPath();
+        conxt.moveTo(fixedLineX, 150);
+        conxt.lineTo(fixedLineX, 10);
+
+        conxt.strokeStyle = "#FF0000";
+        conxt.stroke();
+    }
+
+</script>
+
+<body onload=startAnimation(10);>
+    <div class="container-fluid">
+        <div class="row bg-light">
+            <div id="digitalClock" class="col-2 bg-red"> </div>
+            <div class="col-10 " id="container"><canvas id="canvas" width="2000" height="200"></canvas></div>
+        </div>
+        <button onclick="zoom()">+</button>
+        <button onclick="zoom1()">-</button>
+        <br>
+        <div id="gap"></div>
+    </div>
+</body>
+</html>
+
+
+//var timefunc = setTimeout( function timeoutfunction( this: any ) {
+    //    console.log( "timefuncccccccccccccccccccccccccccccccccccccccccccccccccc" )
+    //    this.currentTime();
+    //    //var ctx = document.getElementById( 'canvas' ).getContext( '2d' );
+    //    var timeinterval = 10;
+    //    //var timeinterval = document.getElementById( "gap" ).innerHTML;
+    //    var date = new Date();
+    //    var secSinceEpoch = new Date().getTime() / 1000; //current time in seconds since epoch
+    
+    //    console.log( "secSinceEpoch", secSinceEpoch );
+    //    var Seconds = date.getSeconds();
+    //    var Minutes = date.getMinutes();
+    //    var Hours = date.getHours();
+    
+    //    this.ctx.clearRect( 0, 0, 2000, 200 );
+    //    this.drawFixedLine( this.ctx, 2 * this.space * ( ( this.numSmallTicks * 2 ) + 2 ) );
+    
+    
+    //    var newspace = this.space / ( this.timeinterval / 10 );
+    //    console.log( "newspace is : ", newspace );
+    
+    //    var startXValue = 0 - ( ( ( Minutes * 60 ) + Seconds ) % this.timeinterval ) * ( newspace );
+    //    console.log( "Yahi", startXValue, Minutes )
+    
+    //    var secSinceEpo;
+    
+    //    if ( this.timeinterval > 600 ) {
+    //        if ( ( ( Hours * 3600 ) + ( Minutes * 60 ) + Seconds ) % this.timeinterval == 0 ) {
+    //            secSinceEpo = secSinceEpoch
+    //        }
+    //        else {
+    
+    //            secSinceEpo = secSinceEpoch - ( ( Hours * 3600 ) + ( Minutes * 60 ) + Seconds ) % timeinterval;
+    //            console.log( "YAHAPE DEKHE", secSinceEpo )
+    //        }
+    //    }
+    
+    //    if ( this.timeinterval > 60 ) {
+    //        if ( ( ( Minutes * 60 ) + Seconds ) % this.timeinterval == 0 ) {
+    //            secSinceEpo = secSinceEpoch
+    //        }
+    //        else {
+    
+    //            secSinceEpo = secSinceEpoch - ( ( Minutes * 60 ) + Seconds ) % this.timeinterval;
+    //            console.log( "YAHAPE DEKHE", secSinceEpo )
+    //        }
+    //    }
+    
+    //    if ( Seconds % this.timeinterval == 0 ) {
+    //        secSinceEpo = secSinceEpoch;
+    //    }
+    //    else {
+    //        secSinceEpo = secSinceEpoch - secSinceEpoch % timeinterval;
+    //    }
+    //    this.drawTimeLineNew( this.ctx, startXValue/*start X value*/, 0/*cnt*/, secSinceEpo - ( 2 * this.timeinterval ) /*starttime*/, timeinterval /*timeinterval*/, this.numSmallTicks/*number of small ticks*/ );
+    
+    //    //this.startAnimation(10)
+    //    setTimeout( timeoutfunction, 1000 );
+    //}, 1000 );
+    //current time shown on upper left of the window
