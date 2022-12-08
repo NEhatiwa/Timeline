@@ -3,11 +3,11 @@ box-sizing: border-box; }
 main{
     width: 100vw;
     height: 100vh;
-    margin:100px auto;
+    /*margin:100px auto;
     display:grid;
     grid-template-rows: 150px 150px ;
     grid-template-columns: 75px 100px 80px;
-    grid: gap 20px;
+    grid: gap 20px;*/
 }
 
 .div1{

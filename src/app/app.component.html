@@ -4,16 +4,19 @@
         <!-- <link rel="stylesheet" type="text/css" href="stylegrid.css"> -->
     </head>
     <body>
-        <main>
-            <div class="div1">
+        <main class="row">
+            <div class="col-4 bg-primary">
                 part 1
             </div>
-            <div class="div2">
-                <!-- <app-trial></app-trial> -->
-                part 2
-            </div>
-            <div class="div3">
-                part 3
+            <div class="col-8 bg-secondary">
+
+                <div class="bg-success h-50">
+                    <app-trial></app-trial>
+                    <!--part 2-->
+                </div>
+                <div class="bg-warning h-50">
+                    part 3
+                </div>
             </div>
         </main>
     </body>
