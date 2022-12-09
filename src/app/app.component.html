@@ -1,36 +1,10 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <!-- <link rel="stylesheet" type="text/css" href="stylegrid.css"> -->
-    </head>
-    <body>
-        <main>
-            <div class="div1">
-                part 1
-            </div>
-            <div class="div2">
-                <!-- <app-trial></app-trial> -->
-                part 2
-            </div>
-            <div class="div3">
-                part 3
-            </div>
-        </main>
-    </body>
-    
-</html>
-
-
-
-
-
-
-
-
-<!-- 
-<mat-slide-toggle>check</mat-slide-toggle>
-<mat-divider [vertical] ="true" ></mat-divider>
-<mat-slide-toggle>toggle</mat-slide-toggle> -->
+<mat-grid-list [cols]="4" rowHeight="100px">
+    <mat-grid-tile [rowspan]="6" style = "background-color:aqua">1</mat-grid-tile>
+    <mat-grid-tile [rowspan]="4" [colspan]="3" class="div2">
+        <app-trial></app-trial>
+    </mat-grid-tile>
+    <mat-grid-tile [rowspan]="2" [colspan]="3" style = "background-color:aquamarine">3</mat-grid-tile>
+</mat-grid-list>
 
 
 

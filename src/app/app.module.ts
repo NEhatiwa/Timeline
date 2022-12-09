@@ -4,8 +4,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TrialComponent } from './trial/trial.component';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import {MatDividerModule,MatListModule} from '@angular/material/';
+import { HttpClientModule } from '@angular/common/http';
+import {MatGridListModule} from '@angular/material/grid-list';
 
 
 
@@ -16,10 +16,9 @@ import {MatDividerModule,MatListModule} from '@angular/material/';
   ],
   imports: [
     BrowserModule,
-    MatSlideToggleModule,
-    MatDividerModule,
-    MatListModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent],
