@@ -1,12 +1,14 @@
-<div class="container-fluid">
-    <div class="row bg-light">
+
+<div class = "abc">
+    <!-- <div class="row w-100 bg-light"> -->
         <div id="digitalClock" class="col-2 bg-red">{{tmi}}</div>
-        <div class="col-10" id="container">
-            <canvas #canvas width="2000" height="200"></canvas>
+        <div class="col-10" id="container" >
+            <canvas #canvas class="test"></canvas>
         </div>
-    </div>
+    <!-- </div> -->
     <button (click)="zoom()" class="btn btn-primary mr-4 mt-4">+</button>
     <button (click)="zoom1()" class="btn btn-primary mt-4">-</button>
     <br>
-    <div #gap class="mt-4">{{some}}</div>
+    <div #gap class="mt-1">{{some}}</div>
 </div>
+
