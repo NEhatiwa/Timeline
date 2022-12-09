@@ -10,7 +10,7 @@ export class TrialComponent implements OnInit {
     ctx: any;
     tmi: any = "j";
     space = 12;
-    totalNum = 30;
+    totalNum = 50;
     startX = -100
     hr = 0;
     min = 0;
@@ -54,7 +54,7 @@ export class TrialComponent implements OnInit {
         var Minutes = date.getMinutes();
         var Hours = date.getHours();
 
-        this.ctx.clearRect( 0, 0, 2000, 200 );
+        this.ctx.clearRect( 0, 0, 1500, 200 );
         this.drawFixedLine( parseInt( JSON.stringify( 2 * this.space * ( ( this.numSmallTicks * 2 ) + 2 ) ) ) );
 
 
@@ -179,7 +179,7 @@ export class TrialComponent implements OnInit {
         }
 
         cnt++;
-        if ( cnt <= 16 )
+        if ( cnt <= 30 )
             this.drawTimeLineNew( parseInt( startXValue + this.space * ( ( numSmallTicks * 2 ) + 2 ) ), cnt, startTimeSinceEpoch + parseFloat( timeinterval ), timeinterval, numSmallTicks );
 
     }
