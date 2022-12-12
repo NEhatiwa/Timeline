@@ -1,0 +1,31 @@
+.heading{
+    font-size: 13px;
+    }
+.line-1 {
+        height: 1px;
+        background: rgb(51, 50, 50);
+      }
+.name-contains{
+    font-size: small;
+    left: 80px;
+}
+.chckbox{
+    margin: 0 12px;
+    float: right;
+}
+.clearBtn {
+    position: absolute;
+    margin:0;
+    opacity:0;
+    transition: opacity 0.2s;
+    color:white;
+}
+.clip-name{
+    font-size: small;
+}
+.mat-tab-group {
+    margin-bottom: 100px;
+  }
+  table {
+    width: 100%;
+  }

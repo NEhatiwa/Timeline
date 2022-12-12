@@ -1,28 +1,25 @@
-#canvas {
-    border: 2px solid red;
-}
 
-#digitalClock {
+ #digitalClock {
     font-family: sans-serif;
-    color: red;
+    color: rgb(25, 24, 24);
     font-size: 26px;
     text-align: center;
 }
 
 #container {
-    width: 750px;
-    height: 200px;
-    overflow-x: auto;
+    /* width: 750px; */
+    height: 100px;
+    overflow-x: scroll;
     overflow-y: hidden;
     border: 1px;
+    /* scrollbar-x-position: top; */
+    /* transform: rotate(180deg); */
+
+}
+.xyz{
+    /* transform: rotate(-180deg); */
+
 }
 
-/* .test{
-    width: 100%;
-    height: 100%;
-}
 
-.abc{
-    width: 100%;
-    border:1px solid black;
-} */
+

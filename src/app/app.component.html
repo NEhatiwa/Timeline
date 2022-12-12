@@ -1,7 +1,53 @@
-<mat-grid-list [cols]="4" rowHeight="100px">
-    <mat-grid-tile [rowspan]="6" style = "background-color:aqua">1</mat-grid-tile>
-    <mat-grid-tile [rowspan]="4" [colspan]="3" class="div2" style = "background-color:rgb(177, 166, 194)">
-        <app-trial></app-trial>
-    </mat-grid-tile>
-    <mat-grid-tile [rowspan]="2" [colspan]="3" style = "background-color:aquamarine">3</mat-grid-tile>
-</mat-grid-list>
+<mat-drawer-container >
+<mat-drawer #drawer mode="side" class="left_bar"  >
+    <app-left></app-left>
+</mat-drawer>
+<mat-drawer-content>
+    <mat-grid-list [cols]="60" rowHeight="70px">     
+        <mat-grid-tile [rowspan]="8" style = "background-color:rgb(225, 233, 233)" class="abcd"> 
+        <!-- <app-left></app-left> -->
+        <button (click)="drawer.toggle()">te
+            <!-- <mat-icon>arrow_left</mat-icon> -->
+        </button>
+        </mat-grid-tile>
+        <mat-grid-tile [rowspan]="4" [colspan]="59" class="border border-warning-1" style = "background-color:rgb(177, 166, 194)">
+            <div class="w-100 h-100">
+                <div class="w-100">
+                    <app-trial></app-trial>
+                </div>
+            </div>
+        </mat-grid-tile>
+    <mat-grid-tile [rowspan]="1" [colspan]="59" style="background-color: rgb(165, 146, 185);">
+        <div class="blech" >
+            <button mat-raised-button style="width:5px; margin-right: 2px;font-size: small;padding: 0;line-height: 17px;" >
+                Take <br />Next</button>
+            <button mat-raised-button style="width:5px; margin-right: 2px;font-size: small;padding: 0;line-height: 17px;" >
+                Drop <br />Next</button>
+            <button mat-raised-button style="width:5px; margin-right: 2px;font-size: small;padding: 0;line-height: 17px;" >
+                Hold <br />Next</button>
+            <button mat-raised-button style="width:5px; margin-right: 2px;font-size: small;padding: 0;line-height: 17px;">
+                Take <br />Selected</button>
+            <button mat-raised-button style="width:5px; margin-right: 2px;font-size: small;padding: 0;line-height: 17px;">
+                JumpTo <br />Selected</button>
+            <button mat-raised-button style="width:5px; margin-right: 2px;font-size: small;padding: 0;line-height: 17px;">
+                Channel <br />Override</button>
+            <button mat-raised-button style="width:5px; margin-right: 2px;font-size: small;padding: 0;line-height: 17px;">
+                Mixer <br />Override</button>
+            <button mat-raised-button style="width:5px; margin-right: 2px;font-size: small;padding: 0;line-height: 17px;">
+                ARC <br />Override</button>
+            <button mat-raised-button style="width:5px; margin-right: 2px;font-size: small;padding: 0;line-height: 17px;" >
+                Offline <br />Mode</button>
+            <button mat-raised-button style="width:5px; margin-right: 2px;font-size: small;padding: 0;line-height: 17px;">
+                Control <br />Mode</button>
+        </div>
+        </mat-grid-tile>
+        <mat-grid-tile [rowspan]="3" [colspan]="59" style = "background-color:aquamarine">
+            <app-right></app-right>
+        </mat-grid-tile>
+    </mat-grid-list>
+   <!-- <p><button mat-button (click)="drawer.toggle();">Toggle</button></p> -->
+</mat-drawer-content>
+
+</mat-drawer-container>
+
+

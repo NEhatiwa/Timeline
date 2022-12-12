@@ -1,14 +1,17 @@
-
-<div class = "abc">
+ <div class ="w-100 h-100 border border-1">
     <div class="row bg-light">
         <div id="digitalClock" class="col-2 bg-red">{{tmi}}</div>
-        <div class="col-10" id="container" >
-            <canvas #canvas class="test" width="1500" height="200"></canvas>
+        <div class="col-10" >
+            <button (click)="zoom()" class="mr-1 p-1">+</button>
+            <button (click)="zoom1()" class="p-1">-</button>
+        <div class="xyz" id="container" >
+            
+            <canvas #canvas width="1500px" class="px-4 xyz"></canvas>
+        
         </div>
     </div>
-    <button (click)="zoom()" class="btn btn-primary mr-4 mt-4">+</button>
-    <button (click)="zoom1()" class="btn btn-primary mt-4">-</button>
+    </div>
+  
     <br>
     <div #gap class="mt-1">{{some}}</div>
 </div>
-

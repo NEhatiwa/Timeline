@@ -1,3 +1,20 @@
-.div2{
-    /* width:600px */
+.left_bar{
+    display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+  height: 300vh;
+  background: rgba(165, 144, 144, 0.5);
+}
+
+.abcd{
+    width:20px
+}
+
+.blech{
+    
+    display: table-cell;
+    justify-content: flex-start;
+
+
 }

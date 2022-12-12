@@ -1,10 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { LeftComponent } from './left/left.component';
+import { RightComponent } from './right/right.component';
 import { TrialComponent } from './trial/trial.component';
 
 const routes: Routes = [
-    //{ path: 'trial', component: TrialComponent }
-    // { path: 'second-component', component: SecondComponent },
+    { path: 'trial', component: TrialComponent },
+    { path: 'left', component: LeftComponent },
+    { path: 'right', component: RightComponent }
 
 ];
 
